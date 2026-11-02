@@ -2,8 +2,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wallet/features/subscriptions/domain/logic/subscription_validator.dart';
 
 void main() {
-  Set<SubscriptionError> validate({String name = 'Netflix', int amountMinor = 4300, String currency = 'PLN', DateTime? paymentDate}) =>
-      validateSubscription(name: name, amountMinor: amountMinor, currency: currency, paymentDate: paymentDate ?? DateTime(2025, 2, 10));
+  Set<SubscriptionError> validate({
+    String name = 'Netflix',
+    int amountMinor = 4300,
+    String currency = 'PLN',
+    DateTime? paymentDate,
+  }) => validateSubscription(
+    name: name,
+    amountMinor: amountMinor,
+    currency: currency,
+    paymentDate: paymentDate ?? DateTime(2025, 2, 10),
+  );
 
   test('valid data', () {
     expect(validate(), isEmpty);
@@ -34,10 +43,15 @@ void main() {
   });
 
   test('day of a month after 28', () {
-    expect(validate(paymentDate: DateTime(2025, 3, 29)), {SubscriptionError.paymentDayTooLate});
+    expect(validate(paymentDate: DateTime(2025, 3, 29)), {
+      SubscriptionError.paymentDayTooLate,
+    });
   });
 
   test('few errors at once', () {
-    expect(validate(name: '', amountMinor: 0), {SubscriptionError.nameEmpty, SubscriptionError.amountNotPositive});
+    expect(validate(name: '', amountMinor: 0), {
+      SubscriptionError.nameEmpty,
+      SubscriptionError.amountNotPositive,
+    });
   });
 }

@@ -1,6 +1,16 @@
-enum SubscriptionError { nameEmpty, amountNotPositive, currencyInvalid, paymentDayTooLate }
+enum SubscriptionError {
+  nameEmpty,
+  amountNotPositive,
+  currencyInvalid,
+  paymentDayTooLate,
+}
 
-Set<SubscriptionError> validateSubscription({required String name, required int amountMinor, required String currency, required DateTime paymentDate}) => {
+Set<SubscriptionError> validateSubscription({
+  required String name,
+  required int amountMinor,
+  required String currency,
+  required DateTime paymentDate,
+}) => {
   if (name.trim().isEmpty) SubscriptionError.nameEmpty,
   if (amountMinor <= 0) SubscriptionError.amountNotPositive,
   if (currency.length != 3) SubscriptionError.currencyInvalid,

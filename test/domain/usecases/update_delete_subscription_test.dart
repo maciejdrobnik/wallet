@@ -17,11 +17,15 @@ void main() {
 
   test('UpdateSubscription refresh updateAt', () async {
     when(() => repo.update(any())).thenAnswer((_) async {});
-    final update = UpdateSubscription(repo, now: () => DateTime.utc(2025, 6, 1));
+    final update = UpdateSubscription(
+      repo,
+      now: () => DateTime.utc(2025, 6, 1),
+    );
 
     await update(makeSub(name: 'Spotify', updatedAt: DateTime.utc(2025, 1, 1)));
 
-    final saved = verify(() => repo.update(captureAny())).captured.single as Subscription;
+    final saved =
+        verify(() => repo.update(captureAny())).captured.single as Subscription;
     expect(saved.name, 'Spotify');
     expect(saved.updatedAt, DateTime.utc(2025, 6, 1));
   });

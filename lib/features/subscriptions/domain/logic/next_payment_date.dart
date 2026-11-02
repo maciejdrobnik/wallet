@@ -17,7 +17,11 @@ DateTime _occurrence(DateTime anchor, BillingCycle cycle, int n) {
   };
 }
 
-DateTime nextPaymentDate({required DateTime anchor, required BillingCycle cycle, required DateTime today}) {
+DateTime nextPaymentDate({
+  required DateTime anchor,
+  required BillingCycle cycle,
+  required DateTime today,
+}) {
   final startOfToday = DateTime(today.year, today.month, today.day);
   final anchorDay = DateTime(anchor.year, anchor.month, anchor.day);
 

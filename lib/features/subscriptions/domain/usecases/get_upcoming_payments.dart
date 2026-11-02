@@ -18,10 +18,18 @@ class GetUpcomingPayments {
               .map(
                 (s) => UpcomingPayment(
                   subscription: s,
-                  date: nextPaymentDate(anchor: s.nextPaymentDate, cycle: s.billingCycle, today: today),
+                  date: nextPaymentDate(
+                    anchor: s.nextPaymentDate,
+                    cycle: s.billingCycle,
+                    today: today,
+                  ),
                 ),
               )
-              .where((p) => withinDays == null || p.date.difference(today).inDays <= withinDays)
+              .where(
+                (p) =>
+                    withinDays == null ||
+                    p.date.difference(today).inDays <= withinDays,
+              )
               .toList()
             ..sort((a, b) => a.date.compareTo(b.date));
 

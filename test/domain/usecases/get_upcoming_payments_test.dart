@@ -24,7 +24,10 @@ void main() {
 
     final result = await getUpcoming().first;
 
-    expect(result, [UpcomingPayment(subscription: soon, date: DateTime(2025, 3, 22)), UpcomingPayment(subscription: late, date: DateTime(2025, 3, 25))]);
+    expect(result, [
+      UpcomingPayment(subscription: soon, date: DateTime(2025, 3, 22)),
+      UpcomingPayment(subscription: late, date: DateTime(2025, 3, 25)),
+    ]);
   });
 
   test('today counted as payment', () async {

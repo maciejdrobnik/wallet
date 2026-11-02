@@ -18,7 +18,11 @@ void main() {
   setUp(() {
     repo = MockRepo();
     when(() => repo.add(any())).thenAnswer((_) async {});
-    addSubscription = AddSubscription(repo, generateId: () => 'id-1', now: () => DateTime.utc(2025, 1, 1));
+    addSubscription = AddSubscription(
+      repo,
+      generateId: () => 'id-1',
+      now: () => DateTime.utc(2025, 1, 1),
+    );
   });
 
   test('Add new subscription', () async {
@@ -31,7 +35,8 @@ void main() {
       paymentDate: DateTime(2025, 2, 10),
     );
 
-    final saved = verify(() => repo.add(captureAny())).captured.single as Subscription;
+    final saved =
+        verify(() => repo.add(captureAny())).captured.single as Subscription;
 
     expect(saved.id, 'id-1');
     expect(saved.name, 'Netflix');
